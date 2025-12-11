@@ -1,15 +1,31 @@
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
+/**
+ * Represents the ball in the Brick Blast game.
+ * Features a glowing gradient effect for visual appeal.
+ */
 public class Ball {
     private int posX;
     private int posY;
-    private int dirX;
-    private int dirY;
+    private double dirX;
+    private double dirY;
     private int size = 20;
 
-    public Ball(int startX, int startY, int startDirX, int startDirY) {
+    // Base speeds for reference
+    private static final double BASE_SPEED_X = 2.5;
+    private static final double BASE_SPEED_Y = 3.5;
+
+    // Colors for gradient effect
+    private static final Color BALL_COLOR_INNER = new Color(255, 255, 100);
+    private static final Color BALL_COLOR_OUTER = new Color(255, 180, 0);
+    private static final Color GLOW_COLOR = new Color(255, 200, 50, 100);
+
+    public Ball(int startX, int startY, double startDirX, double startDirY) {
         this.posX = startX;
         this.posY = startY;
         this.dirX = startDirX;
@@ -17,13 +33,28 @@ public class Ball {
     }
 
     public void move() {
-        posX += dirX;
-        posY += dirY;
+        posX += (int) dirX;
+        posY += (int) dirY;
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillOval(posX, posY, size, size);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Draw glow effect (larger, semi-transparent circle)
+        g2d.setColor(GLOW_COLOR);
+        g2d.fillOval(posX - 4, posY - 4, size + 8, size + 8);
+
+        // Draw ball with gradient
+        GradientPaint gradient = new GradientPaint(
+                posX, posY, BALL_COLOR_INNER,
+                posX + size, posY + size, BALL_COLOR_OUTER);
+        g2d.setPaint(gradient);
+        g2d.fillOval(posX, posY, size, size);
+
+        // Draw highlight (small white circle for shine effect)
+        g2d.setColor(new Color(255, 255, 255, 180));
+        g2d.fillOval(posX + 4, posY + 3, 6, 6);
     }
 
     public void reverseX() {
@@ -42,11 +73,11 @@ public class Ball {
         return posY;
     }
 
-    public int getDirX() {
+    public double getDirX() {
         return dirX;
     }
 
-    public int getDirY() {
+    public double getDirY() {
         return dirY;
     }
 
@@ -62,15 +93,48 @@ public class Ball {
         this.posY = y;
     }
 
-    public void setDirX(int dx) {
+    public void setDirX(double dx) {
         this.dirX = dx;
     }
 
-    public void setDirY(int dy) {
+    public void setDirY(double dy) {
         this.dirY = dy;
     }
 
     public Rectangle getRect() {
         return new Rectangle(posX, posY, size, size);
+    }
+
+    /**
+     * Create a copy of this ball with slightly different direction (for multi-ball)
+     */
+    public Ball clone(double angleOffset) {
+        double newDirX = dirX + angleOffset;
+        double newDirY = dirY;
+        return new Ball(posX, posY, newDirX, newDirY);
+    }
+
+    /**
+     * Slow down the ball speed
+     */
+    public void slowDown() {
+        dirX *= 0.7;
+        dirY *= 0.7;
+        // Ensure minimum speed
+        if (Math.abs(dirX) < 1.5)
+            dirX = dirX > 0 ? 1.5 : -1.5;
+        if (Math.abs(dirY) < 2.0)
+            dirY = dirY > 0 ? 2.0 : -2.0;
+    }
+
+    /**
+     * Get base speed adjusted for level
+     */
+    public static double getBaseSpeedX(int level) {
+        return BASE_SPEED_X + (level - 1) * 0.3;
+    }
+
+    public static double getBaseSpeedY(int level) {
+        return BASE_SPEED_Y + (level - 1) * 0.4;
     }
 }

@@ -1,16 +1,34 @@
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
+/**
+ * Main entry point for the Brick Blast game.
+ * Creates and displays the game window.
+ */
 public class Main {
     public static void main(String[] args) {
-        JFrame obj = new JFrame();
-        GamePanel gamePlay = new GamePanel();
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame();
+            GamePanel gamePanel = new GamePanel();
 
-        obj.setBounds(10, 10, 700, 600);
-        obj.setTitle("Brick Breaker");
-        obj.setResizable(false);
-        obj.setVisible(true);
-        obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        obj.add(gamePlay);
-        obj.setVisible(true);
+            frame.setTitle("🎮 Brick Blast - Java Edition");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
+
+            // Set preferred size for the game panel
+            gamePanel.setPreferredSize(new Dimension(700, 600));
+            frame.add(gamePanel);
+            frame.pack();
+
+            // Center the window on screen
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int x = (screenSize.width - frame.getWidth()) / 2;
+            int y = (screenSize.height - frame.getHeight()) / 2;
+            frame.setLocation(x, y);
+
+            frame.setVisible(true);
+        });
     }
 }
