@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 /**
- * Main entry point for the Brick Blast game.
- * Creates and displays the game window.
+ * Entry point utama untuk game Brick Blast.
+ * Membuat dan menampilkan jendela game.
  */
 public class Main {
     public static void main(String[] args) {
@@ -13,16 +13,16 @@ public class Main {
             JFrame frame = new JFrame();
             GamePanel gamePanel = new GamePanel();
 
-            frame.setTitle("🎮 Brick Blast - Java Edition");
+            frame.setTitle("Brick Blast - Java Edition");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setResizable(false);
 
-            // Set preferred size for the game panel
+            // Set ukuran yang diinginkan untuk panel game
             gamePanel.setPreferredSize(new Dimension(700, 600));
             frame.add(gamePanel);
             frame.pack();
 
-            // Center the window on screen
+            // Posisikan jendela di tengah layar
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             int x = (screenSize.width - frame.getWidth()) / 2;
             int y = (screenSize.height - frame.getHeight()) / 2;

@@ -6,8 +6,8 @@ import java.awt.RenderingHints;
 import java.awt.Rectangle;
 
 /**
- * Represents a power-up that falls from destroyed bricks.
- * Players collect power-ups by catching them with the paddle.
+ * Merepresentasikan power-up yang jatuh dari brick yang dihancurkan.
+ * Pemain mengumpulkan power-up dengan menangkapnya menggunakan paddle.
  */
 public class PowerUp {
     private int x;
@@ -25,14 +25,14 @@ public class PowerUp {
     }
 
     /**
-     * Move the power-up down
+     * Menggerakkan power-up ke bawah
      */
     public void fall() {
         y += fallSpeed;
     }
 
     /**
-     * Draw the power-up with gradient and icon
+     * Menggambar power-up dengan gradient dan ikon
      */
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -41,7 +41,7 @@ public class PowerUp {
         Color baseColor = type.getColor();
         Color darkColor = baseColor.darker();
 
-        // Gradient background
+        // Background gradient
         GradientPaint gradient = new GradientPaint(x, y, baseColor, x, y + height, darkColor);
         g2d.setPaint(gradient);
         g2d.fillRoundRect(x, y, width, height, 8, 8);
@@ -50,7 +50,7 @@ public class PowerUp {
         g2d.setColor(Color.WHITE);
         g2d.drawRoundRect(x, y, width, height, 8, 8);
 
-        // Icon/Symbol based on type
+        // Ikon/Simbol berdasarkan tipe
         g2d.setColor(Color.WHITE);
         g2d.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
         String symbol = getSymbol();

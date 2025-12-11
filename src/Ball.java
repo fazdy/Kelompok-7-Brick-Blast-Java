@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
 /**
- * Represents the ball in the Brick Blast game.
- * Features a glowing gradient effect for visual appeal.
+ * Merepresentasikan bola dalam game Brick Blast.
+ * Menampilkan efek gradient yang bersinar untuk tampilan visual yang menarik.
  */
 public class Ball {
     private int posX;
@@ -16,11 +16,11 @@ public class Ball {
     private double dirY;
     private int size = 20;
 
-    // Base speeds for reference
+    // Kecepatan dasar sebagai referensi
     private static final double BASE_SPEED_X = 2.5;
     private static final double BASE_SPEED_Y = 3.5;
 
-    // Colors for gradient effect
+    // Warna untuk efek gradient
     private static final Color BALL_COLOR_INNER = new Color(255, 255, 100);
     private static final Color BALL_COLOR_OUTER = new Color(255, 180, 0);
     private static final Color GLOW_COLOR = new Color(255, 200, 50, 100);
@@ -41,18 +41,18 @@ public class Ball {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Draw glow effect (larger, semi-transparent circle)
+        // Gambar efek glow (lingkaran besar semi-transparan)
         g2d.setColor(GLOW_COLOR);
         g2d.fillOval(posX - 4, posY - 4, size + 8, size + 8);
 
-        // Draw ball with gradient
+        // Gambar bola dengan gradient
         GradientPaint gradient = new GradientPaint(
                 posX, posY, BALL_COLOR_INNER,
                 posX + size, posY + size, BALL_COLOR_OUTER);
         g2d.setPaint(gradient);
         g2d.fillOval(posX, posY, size, size);
 
-        // Draw highlight (small white circle for shine effect)
+        // Gambar highlight (lingkaran putih kecil untuk efek kilau)
         g2d.setColor(new Color(255, 255, 255, 180));
         g2d.fillOval(posX + 4, posY + 3, 6, 6);
     }
@@ -106,7 +106,7 @@ public class Ball {
     }
 
     /**
-     * Create a copy of this ball with slightly different direction (for multi-ball)
+     * Membuat salinan bola ini dengan arah yang sedikit berbeda (untuk multi-bola)
      */
     public Ball clone(double angleOffset) {
         double newDirX = dirX + angleOffset;
@@ -115,12 +115,12 @@ public class Ball {
     }
 
     /**
-     * Slow down the ball speed
+     * Memperlambat kecepatan bola
      */
     public void slowDown() {
         dirX *= 0.7;
         dirY *= 0.7;
-        // Ensure minimum speed
+        // Pastikan kecepatan minimum
         if (Math.abs(dirX) < 1.5)
             dirX = dirX > 0 ? 1.5 : -1.5;
         if (Math.abs(dirY) < 2.0)
@@ -128,7 +128,7 @@ public class Ball {
     }
 
     /**
-     * Get base speed adjusted for level
+     * Mendapatkan kecepatan dasar yang disesuaikan dengan level
      */
     public static double getBaseSpeedX(int level) {
         return BASE_SPEED_X + (level - 1) * 0.3;

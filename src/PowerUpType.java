@@ -1,8 +1,8 @@
 import java.awt.Color;
 
 /**
- * Enum representing different types of power-ups in the game.
- * Each power-up has a display name, color, and description.
+ * Enum yang merepresentasikan tipe-tipe power-up dalam game.
+ * Setiap power-up memiliki nama tampilan, warna, dan deskripsi.
  */
 public enum PowerUpType {
     MULTI_BALL("Multi Ball", new Color(50, 150, 255), "Bola jadi 3!"),

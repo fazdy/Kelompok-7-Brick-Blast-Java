@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
 /**
- * Represents the paddle controlled by the player.
- * Features gradient coloring, smooth movement, and size changes from power-ups.
+ * Merepresentasikan paddle yang dikontrol oleh pemain.
+ * Menampilkan warna gradient dan gerakan yang halus.
  */
 public class Paddle {
     private int x;
@@ -19,7 +19,7 @@ public class Paddle {
     private int limitLeft = 10;
     private int screenWidth = 692;
 
-    // Gradient colors for paddle
+    // Warna gradient untuk paddle
     private Color paddleColorTop = new Color(0, 255, 200);
     private Color paddleColorBottom = new Color(0, 150, 180);
 
@@ -49,18 +49,18 @@ public class Paddle {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Draw paddle with gradient
+        // Gambar paddle dengan gradient
         GradientPaint gradient = new GradientPaint(
                 x, y, paddleColorTop,
                 x, y + height, paddleColorBottom);
         g2d.setPaint(gradient);
         g2d.fillRoundRect(x, y, width, height, 10, 10);
 
-        // Draw highlight on top
+        // Gambar highlight di atas
         g2d.setColor(new Color(255, 255, 255, 100));
         g2d.fillRoundRect(x + 5, y + 2, width - 10, 4, 5, 5);
 
-        // Draw border
+        // Gambar border
         g2d.setColor(new Color(0, 100, 130));
         g2d.drawRoundRect(x, y, width, height, 10, 10);
     }
@@ -78,7 +78,7 @@ public class Paddle {
     }
 
     /**
-     * Reset paddle to center position and default size
+     * Reset paddle ke posisi tengah dan ukuran default
      */
     public void reset() {
         this.x = 310;
@@ -88,31 +88,31 @@ public class Paddle {
     }
 
     /**
-     * Make paddle wider (power-up)
+     * Membuat paddle lebih lebar (power-up)
      */
     public void widen() {
         width = (int) (defaultWidth * 1.5);
-        // Ensure paddle stays in bounds
+        // Pastikan paddle tetap dalam batas layar
         if (x + width > screenWidth - 10) {
             x = screenWidth - width - 10;
         }
-        // Change color to indicate power-up
+        // Ubah warna untuk menandakan power-up aktif
         paddleColorTop = new Color(50, 255, 100);
         paddleColorBottom = new Color(30, 180, 60);
     }
 
     /**
-     * Make paddle narrower (debuff)
+     * Membuat paddle lebih kecil (debuff)
      */
     public void narrow() {
         width = (int) (defaultWidth * 0.7);
-        // Change color to indicate debuff
+        // Ubah warna untuk menandakan debuff aktif
         paddleColorTop = new Color(255, 100, 100);
         paddleColorBottom = new Color(180, 60, 60);
     }
 
     /**
-     * Reset paddle size to default
+     * Reset ukuran paddle ke default
      */
     public void resetSize() {
         width = defaultWidth;

@@ -1,23 +1,23 @@
 /**
- * Enum representing the different states of the Brick Blast game.
- * Used for managing game flow and UI rendering.
+ * Enum yang merepresentasikan state-state berbeda dalam game.
+ * Digunakan untuk mengelola alur game dan rendering UI.
  */
 public enum GameState {
-    /** Initial state - shows start screen with instructions */
+    /** State awal - menampilkan layar start dengan instruksi */
     START,
 
-    /** Active gameplay state */
+    /** State gameplay aktif */
     PLAYING,
 
-    /** Game is paused */
+    /** Game sedang di-pause */
     PAUSED,
 
-    /** Player has lost all lives */
+    /** Pemain kehilangan semua nyawa */
     GAME_OVER,
 
-    /** Player has completed current level */
+    /** Pemain menyelesaikan level saat ini */
     LEVEL_COMPLETE,
 
-    /** Player has won the game (completed all levels) */
+    /** Pemain memenangkan game (menyelesaikan semua level) */
     WON
 }
